@@ -1,0 +1,48 @@
+rpg-output-language := 'ocaml';
+
+#シャープから次のセミコロンまでコメント;
+#改行無視、セミコロンまで読む;
+#*は0個以上、+は1個以上、?は0個または1個;
+code := stmt *;
+
+#|は前から順に試す;
+stmt := var | const | if | while | func | struct | return | do;
+
+#単純な羅列は一部失敗したら全部失敗;
+var := 'v' 'a' 'r' sep + name sep * ':' '=' expr;
+
+#'aiu'は'a' 'i' 'u'と等価(糖衣);
+const := 'const' sep + name sep * ':=' expr;
+
+if := 'if' sep+ expr sep * '{' stmt * '}'
+        elif-clause *
+        else-clause ?;
+
+#...;
+
+expr := assignment;
+
+#再帰的な非終端記号が現れる場合はそれ以外の部分から評価する;
+#再帰記号複数はとりあえずエラー;
+assignment := name sep * ':=' sep * assignment | add;
+
+#()はグルーピング;
+add := add ( '+' | '-' ) mul | mul;
+
+#...;
+
+name := alnum +;
+alnum := alpha | numeric;
+numeric := '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
+
+sep := ' ' | '\t' | '\n';
+
+
+#...rpg class settings...(TODO);
+@var := name expr;
+@const := name expr;
+@if :=
+    expr
+    stmts < stmt * >
+    elif < elif-clause * >
+    else < else-clause ? >
