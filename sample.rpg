@@ -45,4 +45,10 @@ sep := ' ' | '\t' | '\n';
     expr
     stmts < stmt * >
     elif < elif-clause * >
-    else < else-clause ? >
+    else < else-clause ? >;
+
+#add := add '+' mul | add '-' mul | mul;
+@add := %plus lhs rhs | %minus lhs rhs | %mul mul;
+
+nest-parens-example := ( 'sometimes' | 'we' 'need' ( 'nested' | 'parenthesis' ) )
+    'to' 'describe' ( 'our' | ( 'extremely' 'cool' | 'languages' ) );

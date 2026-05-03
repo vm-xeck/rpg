@@ -9,6 +9,9 @@ func trimr(str, target) {
 func trim(str, target) {
     return triml(trimr(str, target), target)
 }
+func trimspace(str) {
+    return trim(str, "[[:space:]]")
+}
 
 func nth(str, n) {
     if (n < 0) {

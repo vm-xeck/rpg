@@ -1,8 +1,8 @@
 @namespace "kuin"
 
-func out(rules, classes) {
-    for (c in classes)
-        print toclass(c)
+func out(rules, nodespecs) {
+    for (s in nodespecs)
+        print toclass(s)
     for (r in rules)
         print tofunc(r)
 }
@@ -31,4 +31,5 @@ func classname(name,  result) {
 
 func toclass(name, properties,  result) {
     result = "class " classname(name) "\n"
+
 }
