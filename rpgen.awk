@@ -25,7 +25,7 @@ BEGIN{
 
 END{
     for (rule in rules) {print rule, ":"; for (body in rules[rule]) {printf("  %s", rules[rule][body])}; print ""}
-    for (nodespec in nodespecs) {print nodespec, ":"; for (attr in specs[classspec]) {printf("  %s", nodespecs[nodespec][attr])}; print ""}
+    for (nodespec in nodespecs) {print nodespec, ":"; for (attr in nodespecs[nodepec]) {printf("  %s", nodespecs[nodespec][attr])}; print ""}
 
     out = trim(rules["rpg-output-language"][1], "'") "::out"
     print out
