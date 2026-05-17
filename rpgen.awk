@@ -43,6 +43,7 @@ func parsenodespec(name, attrs) {
     
 }
 
+#不要だと思う
 func ischoice(right,  depth) {
     for (i = 1; i <= length(right); i++) {
         switch (nth(right, i)) {
@@ -59,6 +60,7 @@ func ischoice(right,  depth) {
     return 0
 }
 
+#不要だと思う。parseparensにする
 func expandparens(right,  lp, rp, depth) {
     if ((lp = index(right, "(")) == 0)
         return right
@@ -81,3 +83,25 @@ func expandparens(right,  lp, rp, depth) {
         #TODO: split into choices!
     }
 }
+
+func parsechoices(c, result) {
+    choice[++n]#TODO: 各選択肢の始端と長さを記録
+    for (i = 1; i <= length(c); i++)
+        switch (nth(c, i)) {
+        case "(" :
+            depth++; break
+        case ")" :
+            depth--; break
+        case "|" :
+            if (depth == 0) {
+                choice[++n]["idx"] = i + 1
+                choice[n-1]["len"] = choice[n]["idx"] - choice[n-1]["idx"] - 1
+            }
+        }
+    for (i = 1; i <= n; i++) {
+        parseparens(substr(c, choice[i]["idx"], choice[i]["len"]), flatc)
+        catarys(result, flatc)
+    }
+}
+
+func parseparens(p, result)

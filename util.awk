@@ -20,3 +20,9 @@ func nth(str, n) {
         return substr(str, n, 1)
     }
 }
+
+func catarys(ary1, ary2) {#ary1 :~ ary2
+    bias = length(ary1)
+    for (i = 1; i <= length(ary2); i++)
+        result[bias+i] = ary1[i]
+}
