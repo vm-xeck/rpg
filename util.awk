@@ -24,5 +24,5 @@ func nth(str, n) {
 func catarys(ary1, ary2) {#ary1 :~ ary2
     bias = length(ary1)
     for (i = 1; i <= length(ary2); i++)
-        result[bias+i] = ary1[i]
+        ary1[bias+i] = ary2[i]
 }
